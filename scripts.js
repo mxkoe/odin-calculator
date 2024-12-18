@@ -115,3 +115,17 @@ buttons.forEach((button) => {
     });
   }
 });
+
+/* What to do in the future 
+1. Introduce getter and setter methods for the object
+2. Centralize the event listener method
+3. divide the operate function into operate, getOperate and updateDisplay
+4. Have all the calculation be done in a separate file (calculator.js)
+5. Add tests
+6. Divide the functionality into the following files: 
+  calculator.js: Contains all calculation functions (add, subtract, etc.).
+  state.js: Takes care of the mathObject and its state.
+  ui.js: Contains all UI-related functions, such as updating the display or processing button clicks.
+  main.js: Ties everything together and contains the event listeners.
+more here: https://chatgpt.com/c/6762d84f-14e8-8000-8dfa-35498733d880
+*/
