@@ -21,3 +21,15 @@ function divide(firstNumber, secondNumber) {
 function operate(firstNumber, secondNumber, operator) {
   return;
 }
+
+/* add event listener to the number-buttons */
+const buttons = document.querySelectorAll("button");
+const display = document.querySelector(".display");
+buttons.forEach((button) => {
+  if (button.className.length == 0) {
+    button.addEventListener("click", () => {
+      console.table(button.textContent);
+      display.value = button.textContent;
+    });
+  }
+});
