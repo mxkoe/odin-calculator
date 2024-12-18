@@ -8,24 +8,21 @@ let mathObject = {
 const display = document.querySelector(".display");
 
 function add(firstNumber, secondNumber) {
-  mathObject.calculationResult = firstNumber += secondNumber;
-  display.value = mathObject.calculationResult;
-  mathObject.firstNumber = parseInt(mathObject.calculationResult);
-  mathObject.secondNumber = null;
+  if (isNaN(firstNumber) || isNaN(secondNumber)) {
+    return "Invalid input!";
+  } else return (mathObject.calculationResult = firstNumber += secondNumber);
 }
 
 function subtract(firstNumber, secondNumber) {
-  mathObject.calculationResult = firstNumber -= secondNumber;
-  display.value = mathObject.calculationResult;
-  mathObject.firstNumber = parseInt(mathObject.calculationResult);
-  mathObject.secondNumber = null;
+  if (isNaN(firstNumber) || isNaN(secondNumber)) {
+    return "Invalid input!";
+  } else return (mathObject.calculationResult = firstNumber -= secondNumber);
 }
 
 function multiply(firstNumber, secondNumber) {
-  mathObject.calculationResult = firstNumber *= secondNumber;
-  display.value = mathObject.calculationResult;
-  mathObject.firstNumber = parseInt(mathObject.calculationResult);
-  mathObject.secondNumber = null;
+  if (isNaN(firstNumber) || isNaN(secondNumber)) {
+    return "Invalid input!";
+  } else return (mathObject.calculationResult = firstNumber *= secondNumber);
 }
 
 function divide(firstNumber, secondNumber) {
@@ -39,20 +36,22 @@ function divide(firstNumber, secondNumber) {
 function operate(firstNumber, secondNumber, operator) {
   switch (operator) {
     case "+":
-      add(firstNumber, secondNumber);
+      display.value = add(firstNumber, secondNumber);
       break;
     case "-":
-      subtract(firstNumber, secondNumber);
+      display.value = subtract(firstNumber, secondNumber);
       break;
     case "x":
-      multiply(firstNumber, secondNumber);
+      display.value = multiply(firstNumber, secondNumber);
       break;
     case "/":
-      divide(firstNumber, secondNumber);
+      display.value = divide(firstNumber, secondNumber);
       break;
     default:
-      display.value = "Plz enter a second number!";
+      display.value = "Enter a second number!";
   }
+  mathObject.firstNumber = parseInt(mathObject.calculationResult);
+  mathObject.secondNumber = null;
 }
 
 const buttons = document.querySelectorAll("button");
