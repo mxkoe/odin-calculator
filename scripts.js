@@ -2,34 +2,53 @@ let aNumber;
 let anotherNumber;
 let theOperator;
 let mathObject = {
-  firstNumber: 0,
-  secondNumber: 0,
-  operator: "",
+  firstNumber: null,
+  secondNumber: null,
+  operator: null,
 };
 
+const display = document.querySelector(".display");
+
 function add(firstNumber, secondNumber) {
-  return;
+  let results = (firstNumber += secondNumber);
+  display.value = results;
 }
 
 function subtract(firstNumber, secondNumber) {
-  return;
+  let results = (firstNumber -= secondNumber);
+  display.value = results;
 }
 
 function multiply(firstNumber, secondNumber) {
-  return;
+  let results = (firstNumber *= secondNumber);
 }
 
 function divide(firstNumber, secondNumber) {
-  return;
+  let results = (firstNumber /= secondNumber);
+  display.value = results;
 }
 
 function operate(firstNumber, secondNumber, operator) {
-  return;
+  switch (operator) {
+    case "+":
+      add(firstNumber, secondNumber);
+      break;
+    case "-":
+      subtract(firstNumber, secondNumber);
+      break;
+    case "*":
+      multiply(firstNumber, secondNumber);
+      break;
+    case "/":
+      divide(firstNumber, secondNumber);
+      break;
+    default:
+      throw new Error("ERROR");
+  }
 }
 
-/* add event listener to the number-buttons */
+/* add event listener to the buttons */
 const buttons = document.querySelectorAll("button");
-const display = document.querySelector(".display");
 
 buttons.forEach((button) => {
   if (button.className.length == 0) {
@@ -40,17 +59,34 @@ buttons.forEach((button) => {
   } else if (button.className == "operator") {
     button.addEventListener("click", () => {
       let theChosenOperator = button.textContent;
+      let theCurrentNumber = display.value;
+      console.log(mathObject.firstNumber);
+
+      if (mathObject.firstNumber === null) {
+        mathObject.firstNumber = theCurrentNumber;
+        console.log(mathObject.firstNumber);
+      } else if (
+        mathObject.secondNumber === null &&
+        mathObject.operator != null
+      ) {
+        console.log("why is this being called?");
+      }
+      display.value = "";
       switch (theChosenOperator) {
         case "+":
           console.log("Addition");
+          mathObject.operator = "+";
           break;
         case "-":
           console.log("Subtraction");
+          mathObject.operator = "-";
           break;
         case "x":
           console.log("Multiplication");
+          mathObject.operator = "x";
           break;
         case "/":
+          mathObject.operator = "/";
           console.log("Division");
           break;
         default:
@@ -65,6 +101,17 @@ buttons.forEach((button) => {
   } else if (button.className == "equals") {
     button.addEventListener("click", () => {
       console.log("let's call the operate function");
+      mathObject.secondNumber = display.value;
+      operate(
+        mathObject.firstNumber,
+        mathObject.secondNumber,
+        mathObject.operator
+      );
+      console.log(
+        mathObject.firstNumber,
+        mathObject.secondNumber,
+        mathObject.operator
+      );
     });
   }
 });
