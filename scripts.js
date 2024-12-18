@@ -41,19 +41,18 @@ function operate(firstNumber, secondNumber, operator) {
     case "-":
       subtract(firstNumber, secondNumber);
       break;
-    case "*":
+    case "x":
       multiply(firstNumber, secondNumber);
       break;
     case "/":
       divide(firstNumber, secondNumber);
       break;
     default:
-      display.value = "Plz enter a second number!";
-      throw new Error("Not every value is present");
+    // display.value = "Plz enter a second number!";
+    // throw new Error("Not every value is present");
   }
 }
 
-/* add event listener to the buttons */
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
@@ -64,9 +63,8 @@ buttons.forEach((button) => {
     });
   } else if (button.className == "operator") {
     button.addEventListener("click", () => {
-      let theChosenOperator = button.textContent;
+      mathObject.operator = button.textContent;
       let theCurrentNumber = display.value;
-      console.log(mathObject.firstNumber);
 
       if (mathObject.firstNumber === null) {
         mathObject.firstNumber = theCurrentNumber;
@@ -77,8 +75,9 @@ buttons.forEach((button) => {
       ) {
         console.log("why is this being called?");
       }
+
       display.value = "";
-      switch (theChosenOperator) {
+      switch (mathObject.operator) {
         case "+":
           console.log("Addition");
           mathObject.operator = "+";
@@ -106,8 +105,11 @@ buttons.forEach((button) => {
     });
   } else if (button.className == "equals") {
     button.addEventListener("click", () => {
-      console.log("let's call the operate function");
-      mathObject.secondNumber = display.value;
+      if (mathObject.firstNumber === null) {
+        console.log("firstNumber is empty");
+      } else if (mathObject.secondNumber === null) {
+        mathObject.secondNumber = display.value;
+      }
       operate(
         mathObject.firstNumber,
         mathObject.secondNumber,
