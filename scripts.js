@@ -24,11 +24,16 @@ function multiply(firstNumber, secondNumber) {
 }
 
 function divide(firstNumber, secondNumber) {
-  let results = (firstNumber /= secondNumber);
+  let results;
+  if (firstNumber && secondNumber != 0) {
+    results = firstNumber /= secondNumber;
+  } else results = "undefined";
   display.value = results;
 }
 
 function operate(firstNumber, secondNumber, operator) {
+  console.log(firstNumber, secondNumber, operator);
+
   switch (operator) {
     case "+":
       add(firstNumber, secondNumber);
@@ -43,7 +48,8 @@ function operate(firstNumber, secondNumber, operator) {
       divide(firstNumber, secondNumber);
       break;
     default:
-      throw new Error("ERROR");
+      display.value = "Plz enter a second number!";
+      throw new Error("Not every value is present");
   }
 }
 
